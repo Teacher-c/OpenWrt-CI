@@ -35,7 +35,7 @@ env:
 
 jobs:
   owrt_core:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout Projects
         uses: actions/checkout@main
@@ -79,32 +79,25 @@ jobs:
       - name: Clone OWRT Code
         run: |
           git clone $OWRT_URL ./owrt
-      
-      - name: Fix AX6
-        run: |
-          if [ "$OWRT_TARGET" == "Redmi-AX6" ]; then
-            cd ./owrt
-            # 因AX6无线驱动问题，暂时维持源码版本在20230501
-            git reset --hard 26f3634631244eedfbdfd61ea6cc3a2d7f5d896f
-            # Patch
-            cp -rf $GITHUB_WORKSPACE/general/AX6/target/linux/ipq807x/image/generic.mk target/linux/ipq807x/image/
-            echo 'Fix AX6 Done!'
-          else
-            echo 'Fix AX6 Skip!'
-          fi
 
       - name: Load custom feeds
         run: |
           cd ./owrt
-          echo 'src-git smpackage https://github.com/kenzok8/small-package' >> feeds.conf.default
 
-      - name: Update Feeds
+           if [[ "$OWRT_URL" == *"NSS"* || "$OWRT_URL" == *"nss"* ]]; then
+          
+            sed -i '/sqm_scripts_nss/d' feeds.conf.default
+            
+          fi
+            
+          
+      - name: Update And Install Feeds
         run: |
           cd ./owrt
 
           ./scripts/feeds update -a
           ./scripts/feeds install -a
-
+          
       - name: Custom Scripts
         run: |
           cd ./owrt
@@ -118,9 +111,16 @@ jobs:
       - name: Custom Settings
         run: |
           cd ./owrt
-
+          
           rm -rf ./tmp* ./.config*
-          cat $GITHUB_WORKSPACE/Config/$OWRT_TARGET.txt $GITHUB_WORKSPACE/Config/General.txt >> .config
+          
+          cat $GITHUB_WORKSPACE/Config/$OWRT_TARGET.txt $GITHUB_WORKSPACE/Config/Del_Package.txt >> .config
+          
+          if [[ "$OWRT_TARGET" == *"Redmi-AX6"* || "$OWRT_TARGET" == *"X64"* || "$OWRT_TARGET" == *"CR6608"* || "$OWRT_TARGET" == *"AC2100"* ]]; then
+          
+            cat $GITHUB_WORKSPACE/Config/Add_Package.txt >> .config
+
+          fi
 
           $GITHUB_WORKSPACE/Scripts/Extras.sh
 
@@ -170,7 +170,6 @@ jobs:
           body: |
             这是个平台固件包，内含多个设备！
             请注意选择你需要的设备固件！
-            不要问，更就完事了！
 
             源码：${{env.OWRT_SOURCE}}
             平台：${{env.OWRT_TARGET}}
@@ -181,11 +180,12 @@ jobs:
       - name: Delete Old Releases
         uses: dev-drprasad/delete-older-releases@master
         with:
-          keep_latest: 6
+          keep_latest: 20
           delete_tags: true
 
       - name: Delete Old Workflows
         uses: Mattraks/delete-workflow-runs@main
         with:
           retain_days: 0
-          keep_minimum_runs: 1
+          keep_minimum_runs: 2
+
