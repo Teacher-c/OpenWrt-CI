@@ -73,7 +73,7 @@ echo "CONFIG_PACKAGE_dnsmasq_full_tftp=y" >> .config
 echo "CONFIG_PACKAGE_luci-theme-$OWRT_THEME=y" >> .config
 #echo "CONFIG_PACKAGE_luci-app-$OWRT_THEME-config=y" >> .config
 
-增加luci界面和luci中文包
+#增加luci界面和luci中文包
 echo "CONFIG_PACKAGE_luci=y" >> .config
 echo "CONFIG_LUCI_LANG_zh_Hans=y" >> .config
 
