@@ -84,9 +84,15 @@ jobs:
         run: |
           cd ./owrt
 
-           if [[ "$OWRT_URL" == *"NSS"* || "$OWRT_URL" == *"nss"* ]]; then
+          if [[ "$OWRT_URL" == *"NSS"* || "$OWRT_URL" == *"nss"* ]]; then
           
             sed -i '/sqm_scripts_nss/d' feeds.conf.default
+            
+          fi
+
+          if [[ "$OWRT_URL" == "https://github.com/immortalwrt/immortalwrt.git" ]]; then
+          
+            curl -sSL https://raw.githubusercontent.com/chenmozhijin/turboacc/luci/add_turboacc.sh -o add_turboacc.sh && bash add_turboacc.sh
             
           fi
             
