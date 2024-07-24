@@ -31,6 +31,15 @@ if [[ "$OWRT_URL" == "https://github.com/Teacher-c/openwrt-NSS.git" ]]; then
   
 fi
 
+
+
+if [[ "$OWRT_URL" == "https://github.com/immortalwrt/immortalwrt.git" ]]; then
+  
+  #添加turboacc
+  curl -sSL https://raw.githubusercontent.com/chenmozhijin/turboacc/luci/add_turboacc.sh -o add_turboacc.sh && bash add_turboacc.sh
+            
+fi
+
 #自定义单独下载仓库插件函数
 function git_sparse_package(){
     # 参数1是分支名,参数2是库地址。所有文件下载到owrt/package/Add_package
