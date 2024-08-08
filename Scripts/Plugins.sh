@@ -17,6 +17,7 @@ git clone --depth=1 --single-branch --branch "main" https://github.com/xiaorouji
 
 #helloworld
 git clone --depth=1 https://github.com/fw876/helloworld.git ./helloworld
+git -C ./helloworld pull
 
 #Open Clash
 git clone --depth=1 --single-branch --branch "dev" https://github.com/vernesong/OpenClash.git ./OpenClash
