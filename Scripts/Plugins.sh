@@ -12,12 +12,12 @@ git clone https://github.com/sbwml/v2ray-geodata ./v2ray-geodata
 sed -i 's/\\cp \$AD_TMPDIR\/\* \/etc\/mosdns\/rule\/adlist/sed -i '\''\/^\$\/d;\/^\!\/d;\/^#\/d;s\/\[||^]\/\/g'\'' \$AD_TMPDIR\/\* \&\& \\cp \$AD_TMPDIR\/\* \/etc\/mosdns\/rule\/adlist/' ./mosdns/luci-app-mosdns/root/usr/share/mosdns/mosdns.sh
 
 #PassWall2
-git clone --depth=1 --single-branch --branch "main" https://github.com/xiaorouji/openwrt-passwall2.git ./pw2_luci
-git clone --depth=1 --single-branch --branch "main" https://github.com/xiaorouji/openwrt-passwall-packages.git ./pw_packages
+#git clone --depth=1 --single-branch --branch "main" https://github.com/xiaorouji/openwrt-passwall2.git ./pw2_luci
+#git clone --depth=1 --single-branch --branch "main" https://github.com/xiaorouji/openwrt-passwall-packages.git ./pw_packages
 
 #helloworld
-git clone --depth=1 https://github.com/fw876/helloworld.git ./helloworld
-git -C ./helloworld pull
+#git clone --depth=1 https://github.com/fw876/helloworld.git ./helloworld
+#git -C ./helloworld pull
 
 #Open Clash
 git clone --depth=1 --single-branch --branch "dev" https://github.com/vernesong/OpenClash.git ./OpenClash
@@ -42,15 +42,17 @@ fi
 export CORE_TYPE
 export TUN_VER=$(curl -sfL $CORE_VER | sed -n "2{s/\r$//;p;q}")
 
-export GEO_MMDB=https://github.com/alecthw/mmdb_china_ip_list/raw/release/lite/Country.mmdb
+export GEO_MMDB=https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country-only-cn-private.mmdb
+export GEO_IP=https://raw.githubusercontent.com/Loyalsoldier/geoip/release/geoip-only-cn-private.dat
 export GEO_SITE=https://github.com/Loyalsoldier/v2ray-rules-dat/raw/release/geosite.dat
-export GEO_IP=https://github.com/Loyalsoldier/v2ray-rules-dat/raw/release/geoip.dat
+
 
 cd ./OpenClash/luci-app-openclash/root/etc/openclash
 
 curl -sfL -o ./Country.mmdb $GEO_MMDB
-curl -sfL -o ./GeoSite.dat $GEO_SITE
 curl -sfL -o ./GeoIP.dat $GEO_IP
+curl -sfL -o ./GeoSite.dat $GEO_SITE
+
 
 mkdir ./core && cd ./core
 
