@@ -4,8 +4,13 @@ git clone --depth=1 --single-branch --branch $(echo $OWRT_URL | grep -Eiq "lede|
 #git clone --depth=1 --single-branch --branch $(echo $OWRT_URL | grep -Eiq "lede|padavanonly" && echo "18.06" || echo "master") https://github.com/jerrykuku/luci-app-argon-config.git
 
 #mosdns
-git clone https://github.com/sbwml/luci-app-mosdns -b v5 ./mosdns
-git clone https://github.com/sbwml/v2ray-geodata ./v2ray-geodata
+if [[ $OWRT_URL == *"lede"* ]] ; then
+  git clone https://github.com/sbwml/luci-app-mosdns -b v5-lua ./mosdns
+  git clone https://github.com/sbwml/v2ray-geodata ./v2ray-geodata  
+elif
+  git clone https://github.com/sbwml/luci-app-mosdns -b v5 ./mosdns
+  git clone https://github.com/sbwml/v2ray-geodata ./v2ray-geodata
+fi
 
 #修改mosdns.sh 支持更多去广告格式
 #删除空白行，删除！行，删除#行，删除||字符，删除^字符
