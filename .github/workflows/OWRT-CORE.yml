@@ -83,12 +83,8 @@ jobs:
       - name: Load custom feeds
         run: |
           cd ./owrt
-
-          if [[ "$OWRT_URL" == *"NSS"* || "$OWRT_URL" == *"nss"* ]]; then
-          
-            sed -i '/sqm_scripts_nss/d' feeds.conf.default
-            
-          fi         
+          #echo 'src-git smpackage https://github.com/kenzok8/small-package' >> feeds.conf.default    
+          echo 'skip'
           
       - name: Update And Install Feeds
         run: |
@@ -118,6 +114,12 @@ jobs:
           if [[ "$OWRT_TARGET" == *"Redmi-AX6"* || "$OWRT_TARGET" == *"X64"* || "$OWRT_TARGET" == *"CR6608"* || "$OWRT_TARGET" == *"AC2100"* ]]; then
           
             cat $GITHUB_WORKSPACE/Config/Add_Package.txt >> .config
+
+          fi
+
+          if [[ "$OWRT_TARGET" == *"Redmi-AX6"* ]]; then
+          
+            cat $GITHUB_WORKSPACE/Config/NSS_Packages.txt >> .config
 
           fi
 
