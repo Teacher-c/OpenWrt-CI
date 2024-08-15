@@ -73,12 +73,16 @@ echo "CONFIG_PACKAGE_dnsmasq_full_tftp=y" >> .config
 echo "CONFIG_PACKAGE_luci-theme-$OWRT_THEME=y" >> .config
 #echo "CONFIG_PACKAGE_luci-app-$OWRT_THEME-config=y" >> .config
 
+#增加luci界面和luci中文包
 if [[ $OWRT_URL != *"lede"* ]] ; then
-  #增加luci界面和luci中文包
   echo "CONFIG_PACKAGE_luci=y" >> .config
   echo "CONFIG_LUCI_LANG_zh_Hans=y" >> .config
 fi
 
+#增加luci-app-turboacc
+if [[ "$OWRT_URL" == "https://github.com/immortalwrt/immortalwrt.git" ]]; then
+  echo "CONFIG_PACKAGE_luci-app-turboacc=y" >> .config
+fi
 
 #删除MT7621MTK硬件加速仓库默认软件
 if [[ "$OWRT_URL" == "https://github.com/padavanonly/immortalwrt.git" ]]; then
