@@ -7,7 +7,7 @@ git clone --depth=1 --single-branch --branch $(echo $OWRT_URL | grep -Eiq "lede|
 if [[ $OWRT_URL == *"lede"* ]] ; then
   git clone https://github.com/sbwml/luci-app-mosdns -b v5-lua ./mosdns
   git clone https://github.com/sbwml/v2ray-geodata ./v2ray-geodata  
-elif
+else
   git clone https://github.com/sbwml/luci-app-mosdns -b v5 ./mosdns
   git clone https://github.com/sbwml/v2ray-geodata ./v2ray-geodata
 fi
