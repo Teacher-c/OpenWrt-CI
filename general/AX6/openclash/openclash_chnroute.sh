@@ -132,12 +132,13 @@
       else
          curl -SsL --connect-timeout 30 -m 60 --speed-time 30 --speed-limit 1 --retry 2 https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/accelerated-domains.china.conf -o "/tmp/china_domains.list" 2>&1 |sed ':a;N;$!ba; s/\n/ /g' | awk -v time="$(date "+%Y-%m-%d %H:%M:%S")" -v file="/tmp/china_domains.list" '{print time "【" file "】Download Failed:【"$0"】"}' >> "$LOG_FILE"
          curl -SsL --connect-timeout 30 -m 60 --speed-time 30 --speed-limit 1 --retry 2 https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/apple.china.conf -o "/tmp/apple_china_domains.list" 2>&1 |sed ':a;N;$!ba; s/\n/ /g' | awk -v time="$(date "+%Y-%m-%d %H:%M:%S")" -v file="/tmp/apple_china_domains.list" '{print time "【" file "】Download Failed:【"$0"】"}' >> "$LOG_FILE"
+         curl -SsL --connect-timeout 30 -m 60 --speed-time 30 --speed-limit 1 --retry 2 https://raw.githubusercontent.com/Teacher-c/clash/main/MyDirect.conf -o "/tmp/MyDirect_domains.list" 2>&1 |sed ':a;N;$!ba; s/\n/ /g' | awk -v time="$(date "+%Y-%m-%d %H:%M:%S")" -v file="/tmp/MyDirect_domains.list" '{print time "【" file "】Download Failed:【"$0"】"}' >> "$LOG_FILE"
       fi
    fi
    
    if [ "${PIPESTATUS[0]}" -eq "0" ] && [ -s "/tmp/china_domains.list" ] && [ -n "$(cat "/tmp/china_domains.list" |head -1 |grep "server=")" ]; then
       LOG_OUT "CN Domains List Download Success, Check Updated..."
-      cat /tmp/apple_china_domains.list >> /tmp/china_domains.list
+      cat /tmp/apple_china_domains.list /tmp/MyDirect_domains.list >> /tmp/china_domains.list
       sed -i 's/114.114.114.114/223.5.5.5/g' /tmp/china_domains.list
       cmp -s /tmp/china_domains.list "$cndomain_path"
       if [ "$?" -ne "0" ]; then
