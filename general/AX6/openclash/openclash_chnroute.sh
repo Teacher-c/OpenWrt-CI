@@ -136,6 +136,7 @@
 
    #merge into domains.china
    cat /tmp/apple_china_domains.list >> /tmp/china_domains.list
+   sed -i 's/114.114.114.114/223.5.5.5/g' /tmp/china_domains.list
 
    if [ "${PIPESTATUS[0]}" -eq "0" ] && [ -s "/tmp/china_domains.list" ] && [ -n "$(cat "/tmp/china_domains.list" |head -1 |grep "server=")" ]; then
       LOG_OUT "CN Domains List Download Success, Check Updated..."
