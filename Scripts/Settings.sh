@@ -5,6 +5,18 @@ rm -rf $(find feeds/luci/ -type d -regex ".*\(argon\|design\|mosdns\|v2ray-geoda
 rm -rf $(find feeds/packages/ -type d -regex ".*\(argon\|design\|mosdns\|v2ray-geodata\|passwall\|openclash\).*")
 #rm -rf $(find feeds/smpackage/ -type d -regex ".*\(argon\|design\|mosdns\|v2ray-geodata\|passwall\|openclash\).*")
 #rm -rf $(find feeds/smpackage/ -type d -regex ".*\(base-files\|dnsmasq\|firewall\|fullconenat\|libnftnl\|nftables\|ppp\|opkg\|ucl\|upx\|vsftpd-alt\|miniupnpd-iptables\|wireless-regdb\).*")
+
+#curl supports h3/quic.
+# openssl -> quictls
+rm -rf package/libs/openssl
+git clone https://github.com/sbwml/package_libs_openssl package/libs/openssl
+# nghttp3
+git clone https://github.com/sbwml/package_libs_nghttp3 package/libs/nghttp3
+# ngtcp2
+git clone https://github.com/sbwml/package_libs_ngtcp2 package/libs/ngtcp2
+# curl - http3/quic
+rm -rf feeds/packages/net/curl
+git clone https://github.com/sbwml/feeds_packages_net_curl feeds/packages/net/curl
   
 if [[ "$OWRT_URL" == "https://github.com/DoveKi/immortalwrt-nss.git" || "$OWRT_URL" == "https://github.com/Teacher-c/immortalwrt-NSS.git" ]]; then
   
@@ -16,10 +28,6 @@ if [[ "$OWRT_URL" == "https://github.com/DoveKi/immortalwrt-nss.git" || "$OWRT_U
   echo 'skip'
   
 fi
-
-git clone https://github.com/sbwml/feeds_packages_net_curl.git /tmp/curl
-rm -rf feeds/packages/net/curl
-mv -f /tmp/curl feeds/packages/net/
 
 if [[ "$OWRT_URL" == "https://github.com/Teacher-c/openwrt-NSS.git" ]]; then
   
@@ -33,8 +41,6 @@ if [[ "$OWRT_URL" == "https://github.com/Teacher-c/openwrt-NSS.git" ]]; then
   echo 'skip'
   
 fi
-
-
 
 if [[ "$OWRT_URL" == "https://github.com/immortalwrt/immortalwrt.git" ]]; then
   
