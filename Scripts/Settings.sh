@@ -18,7 +18,7 @@ if [[ "$OWRT_URL" == "https://github.com/DoveKi/immortalwrt-nss.git" || "$OWRT_U
 fi
 
 git clone https://github.com/sbwml/feeds_packages_net_curl.git /tmp/curl
-mv -rf /tmp/curl feeds/packages/net/
+mv -f /tmp/curl feeds/packages/net/
 
 if [[ "$OWRT_URL" == "https://github.com/Teacher-c/openwrt-NSS.git" ]]; then
   
