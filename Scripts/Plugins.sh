@@ -4,25 +4,24 @@ git clone --depth=1 --single-branch --branch $(echo $OWRT_URL | grep -Eiq "lede|
 #git clone --depth=1 --single-branch --branch $(echo $OWRT_URL | grep -Eiq "lede|padavanonly" && echo "18.06" || echo "master") https://github.com/jerrykuku/luci-app-argon-config.git
 
 #mosdns
-#if [[ $OWRT_URL == *"lede"* ]] ; then
-#  git clone https://github.com/sbwml/luci-app-mosdns -b v5-lua ./mosdns
-#  git clone https://github.com/sbwml/v2ray-geodata ./v2ray-geodata  
-#else
-#  git clone https://github.com/sbwml/luci-app-mosdns -b v5 ./mosdns
-#  git clone https://github.com/sbwml/v2ray-geodata ./v2ray-geodata
-#fi
+if [[ $OWRT_URL == *"lede"* ]] ; then
+  git clone https://github.com/sbwml/luci-app-mosdns -b v5-lua ./mosdns
+  git clone https://github.com/sbwml/v2ray-geodata ./v2ray-geodata  
+else
+  git clone https://github.com/sbwml/luci-app-mosdns -b v5 ./mosdns
+  git clone https://github.com/sbwml/v2ray-geodata ./v2ray-geodata
+fi
 
 #修改mosdns.sh 支持更多去广告格式
 #删除空白行，删除！行，删除#行，删除||字符，删除^字符
-#sed -i 's/\\cp \$AD_TMPDIR\/\* \/etc\/mosdns\/rule\/adlist/sed -i '\''\/^\$\/d;\/^\!\/d;\/^#\/d;s\/\[||^]\/\/g'\'' \$AD_TMPDIR\/\* \&\& \\cp \$AD_TMPDIR\/\* \/etc\/mosdns\/rule\/adlist/' ./mosdns/luci-app-mosdns/root/usr/share/mosdns/mosdns.sh
+sed -i 's/\\cp \$AD_TMPDIR\/\* \/etc\/mosdns\/rule\/adlist/sed -i '\''\/^\$\/d;\/^\!\/d;\/^#\/d;s\/\[||^]\/\/g'\'' \$AD_TMPDIR\/\* \&\& \\cp \$AD_TMPDIR\/\* \/etc\/mosdns\/rule\/adlist/' ./mosdns/luci-app-mosdns/root/usr/share/mosdns/mosdns.sh
 
 #PassWall2
-#git clone --depth=1 --single-branch --branch "main" https://github.com/xiaorouji/openwrt-passwall2.git ./pw2_luci
-#git clone --depth=1 --single-branch --branch "main" https://github.com/xiaorouji/openwrt-passwall-packages.git ./pw_packages
+git clone --depth=1 --single-branch --branch "main" https://github.com/xiaorouji/openwrt-passwall2.git ./pw2_luci
+git clone --depth=1 --single-branch --branch "main" https://github.com/xiaorouji/openwrt-passwall-packages.git ./pw_packages
 
 #helloworld
-#git clone --depth=1 https://github.com/fw876/helloworld.git ./helloworld
-#git -C ./helloworld pull
+git clone --depth=1 https://github.com/fw876/helloworld.git ./helloworld
 
 #Open Clash
 git clone --depth=1 --single-branch --branch "dev" https://github.com/vernesong/OpenClash.git ./OpenClash
