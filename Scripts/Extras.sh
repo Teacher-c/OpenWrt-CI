@@ -86,7 +86,6 @@ fi
 #增加luci-app-turboacc
 if [[ "$OWRT_URL" == "https://github.com/immortalwrt/immortalwrt.git" ]]; then
   echo "CONFIG_PACKAGE_luci-app-turboacc=y" >> .config
-  echo "CONFIG_PACKAGE_luci-app-sqm=y" >> .config
 fi
 
 #删除MT7621MTK硬件加速仓库默认软件
