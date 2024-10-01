@@ -2,20 +2,20 @@
 # NSS base
 #CONFIG_NSS_MEM_PROFILE_MEDIUM=y
 #CONFIG_ATH11K_MEM_PROFILE_512M=y
-#CONFIG_ATH11K_NSS_SUPPORT=y
-#CONFIG_ATH11K_NSS_MESH_SUPPORT=y
-#CONFIG_PACKAGE_MAC80211_NSS_SUPPORT=y
+CONFIG_ATH11K_NSS_SUPPORT=y
+CONFIG_ATH11K_NSS_MESH_SUPPORT=y
+CONFIG_PACKAGE_MAC80211_NSS_SUPPORT=y
 #CONFIG_PACKAGE_MAC80211_NSS_REDIRECT=y
 #CONFIG_PACKAGE_nss-firmware-default=y
 #CONFIG_PACKAGE_nss-firmware-ipq8074=y
 #CONFIG_PACKAGE_kmod-qca-nss-ecm=y
 #CONFIG_PACKAGE_kmod-qca-nss-dp=y
 #CONFIG_PACKAGE_kmod-qca-nss-drv=y
-#CONFIG_PACKAGE_kmod-qca-nss-drv-pppoe=y
-#CONFIG_PACKAGE_kmod-qca-nss-drv-vlan-mgr=y
+CONFIG_PACKAGE_kmod-qca-nss-drv-pppoe=y
+CONFIG_PACKAGE_kmod-qca-nss-drv-vlan-mgr=y
 #CONFIG_PACKAGE_kmod-qca-nss-drv-igs=y
 #CONFIG_PACKAGE_kmod-qca-nss-drv-qdisc=y
-#CONFIG_PACKAGE_kmod-qca-mcs=y
+CONFIG_PACKAGE_kmod-qca-mcs=y
 
 # NSS extend
 #CONFIG_PACKAGE_kmod-nat46=y
